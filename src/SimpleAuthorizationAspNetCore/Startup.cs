@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using SimpleAuthorizationAspNetCore.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace SimpleAuthorizationAspNetCore
 {
@@ -29,10 +31,12 @@ namespace SimpleAuthorizationAspNetCore
         {
             // Add framework services.
             services.AddMvc();
+
+            services.AddDbContext<ForumContext>(options=>options.UseSqlServer(Configuration.GetConnectionString("ForumContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, ForumContext context)
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
@@ -53,8 +57,11 @@ namespace SimpleAuthorizationAspNetCore
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=Login}/{action=Index}/{id?}");
             });
+
+            DbInitialize.Initialize(context);
+
         }
     }
 }

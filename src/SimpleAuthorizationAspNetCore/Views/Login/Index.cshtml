@@ -1,0 +1,32 @@
+﻿@model SimpleAuthorizationAspNetCore.Model.User
+@{
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+}
+@{
+    ViewData["Title"] = "Logowanie";
+}
+
+
+@using (Html.BeginForm("Authorize", "Login", FormMethod.Post))
+{
+    @Html.AntiForgeryToken();
+    <fieldset>
+
+        <div class="form-group">
+            @Html.TextBoxFor(model => model.Login, null, new { @class = "form-control", @placeholder = "Login" })
+        </div>
+
+        <div class="form-group">
+            @Html.PasswordFor(model => model.Password, new { @class = "form-control", @placeholder = "Password" })
+        </div>
+
+        <input class="btn btn-lg btn-success btn-block" type="submit" value="Log in">
+
+    </fieldset>
+
+
+
+}
+
+
+
