@@ -1,0 +1,4 @@
+src/SimpleAuthorizationAspNetCore/bin/*
+src/SimpleAuthorizationAspNetCore/obj/*
+src/SimpleAuthorizationAspNetCore/wwwroot/lib/*
+.vs/*
