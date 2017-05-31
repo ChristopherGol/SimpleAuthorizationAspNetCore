@@ -19,12 +19,24 @@ namespace SimpleAuthorizationAspNetCore.Data
             }
 
             var users = new List<User>();
-            users.Add(new User { Login = "admin", Password = Secure.MD5Hash("admin"), LastLogin=DateTime.MinValue });
+            users.Add(new User { Login = "admin", Password = Secure.MD5Hash("admin"), LastLogin = DateTime.MinValue });
             users.Add(new User { Login = "root", Password = Secure.MD5Hash("root"), LastLogin = DateTime.MinValue });
 
-            foreach(User user in users)
+            foreach (User user in users)
             {
                 context.Users.Add(user);
+            }
+
+            //context.SaveChanges();
+
+            var articles = new List<Article>();
+            articles.Add(new Article { AuthorID = users.FirstOrDefault(x => x.Login == "admin").ID, Title = "Example title", Text = "Example text", PublishTime = DateTime.Now });
+            articles.Add(new Article { AuthorID = users.FirstOrDefault(x => x.Login == "root").ID, Title = "Example title", Text = "Example text", PublishTime = DateTime.Now });
+            articles.Add(new Article { AuthorID = users.FirstOrDefault(x => x.Login == "admin").ID, Title = "Example title", Text = "Example text", PublishTime = DateTime.Now });
+
+            foreach (Article article in articles)
+            {
+                context.Articles.Add(article);
             }
 
             context.SaveChanges();
