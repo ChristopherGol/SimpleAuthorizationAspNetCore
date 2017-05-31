@@ -26,8 +26,10 @@ namespace SimpleAuthorizationAspNetCore.Controllers
 
         public async Task<IActionResult> Logout()
         {
+            // Sign out and destroy cookie authentication. 
             await HttpContext.Authentication.SignOutAsync("SimpleCookieAuthorization");
 
+            // Redirect to login page. 
             return RedirectToAction("Index", "Login");
         }
     }

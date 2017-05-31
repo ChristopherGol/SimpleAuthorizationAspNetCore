@@ -54,13 +54,23 @@ namespace SimpleAuthorizationAspNetCore
 
             app.UseStaticFiles();
 
+            // Create cookie middleware.
             app.UseCookieAuthentication(new CookieAuthenticationOptions()
             {
-                AuthenticationScheme="SimpleCookieAuthorization",
-                LoginPath=new PathString("/Login/Index"),
-                AccessDeniedPath=new PathString("/Login/Index"),
-                AutomaticAuthenticate=true,
-                AutomaticChallenge=true
+                // Name middleware in application.
+                AuthenticationScheme = "SimpleCookieAuthorization",
+
+                // Relative path request when user want to access resource without authentication.
+                LoginPath = new PathString("/Login/Index"),
+
+                // Relative path request when user want to access resource without pass authentication policies.
+                AccessDeniedPath = new PathString("/Login/Index"),
+
+                // Middleware run on every request.
+                AutomaticAuthenticate = true,
+
+                // Middleware redirect to 'LoginPath' or 'AccessDeniedPath' automatic when authorization fails. 
+                AutomaticChallenge = true
             });
 
             app.UseMvc(routes =>
