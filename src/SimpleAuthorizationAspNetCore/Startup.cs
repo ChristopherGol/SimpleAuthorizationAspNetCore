@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using SimpleAuthorizationAspNetCore.Data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Http;
 
 namespace SimpleAuthorizationAspNetCore
 {
@@ -52,6 +53,15 @@ namespace SimpleAuthorizationAspNetCore
             }
 
             app.UseStaticFiles();
+
+            app.UseCookieAuthentication(new CookieAuthenticationOptions()
+            {
+                AuthenticationScheme="SimpleCookieAuthorization",
+                LoginPath=new PathString("/Login/Index"),
+                AccessDeniedPath=new PathString("/Login/Index"),
+                AutomaticAuthenticate=true,
+                AutomaticChallenge=true
+            });
 
             app.UseMvc(routes =>
             {

@@ -1,0 +1,14 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+@{
+    ViewData["Title"] = "Administration panel";
+}
+
+<center>
+    <span class="admin-welcome">Welcome to Admin panel !</span>
+    <br />
+    <br/>
+    @Html.ActionLink("Log out", "Logout", "Admin", null, new { @class="btn btn-success" })
+
+</center>

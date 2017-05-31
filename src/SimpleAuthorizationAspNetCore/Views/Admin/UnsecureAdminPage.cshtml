@@ -1,0 +1,14 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+@{
+    ViewData["Title"] = "Administration panel";
+}
+
+<center>
+    <span class="admin-welcome">This site doesn't require authorization. !</span>
+    <br />
+    <br/>
+    @Html.ActionLink("Return to admin page", "Index", "Admin", null, new { @class = "btn btn-primary" })
+
+</center>

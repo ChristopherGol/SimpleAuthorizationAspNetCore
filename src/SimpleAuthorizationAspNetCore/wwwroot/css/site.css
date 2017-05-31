@@ -39,6 +39,11 @@ textarea {
     transform: -ms-translate(-50%, -50%);
 }
 
+.admin-welcome {
+    font-weight: bold;
+    font-size: 16pt;
+}
+
 /* Hide/rearrange for smaller screens */
 @media screen and (max-width: 767px) {
     /* Hide captions */
